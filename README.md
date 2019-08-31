@@ -32,13 +32,13 @@ Installing from binary results in potentially lower performance than installing 
 4. Press the "?" key to view help for getting started with the application.
 5. \* 
 
-######\* Optional: If you would like to launch Nebula Draw without having to change your working directory, copy ndraw to /usr/bin/ by running the following command as superuser (su, sudo):
+###### \* Optional: If you would like to launch Nebula Draw without having to change your working directory, copy ndraw to /usr/bin/ by running the following command as superuser (su, sudo):
 
 `cp ~/Downloads/ndraw /usr/bin` *
 
-######\*\* If the download directory on your web browser is different, substitute ~/Downloads with the correct path.
+###### \*\* If the download directory on your web browser is different, substitute ~/Downloads with the correct path.
 
 
-The Nebula Centre Project is an active endeavour created by a small group. The Nebula Centre Project does not currently have an end goal, but does have a series of primary goals, which are currently being pursued and will always be considered in future judgements. To learn more about the Nebula Centre Project visit it on the web at https://nebulacentre.net/about.html
+The Nebula Centre Project is an active endeavour created by a small group. The Nebula Centre Project does not currently have an end goal, but does have a series of primary goals, which are currently being pursued and will always be considered in future judgements. To learn more about the Nebula Centre Project visit it on the web at https://nebulacentre.net.
 
 Contact (https://nebulacentre.net/contact.html) the administrator in regard to any inquiries about Nebula Draw. 
