@@ -13,10 +13,15 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// We always welcome lain
+/* 
+   The Nebula Centre Project is an active endeavour created by a small group.
+   The Nebula Centre Project does not currently have an end goal, 
+   but does have a series of primary goals, which are currently being pursued
+   and will always be considered in future judgements. To learn more about the
+   Nebula Centre Project visit it on the web at https://nebulacentre.net.
 
-/*
-Features for release:
+   We always welcome lain (o.o)
+
 */
 
 #include <stdio.h>
