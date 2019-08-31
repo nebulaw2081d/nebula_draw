@@ -1,8 +1,8 @@
-#Nebula Draw
+### Nebula Draw
 
 Nebula Draw is a Terminal User Interface (TUI) drawing application, created by the Nebula Centre Project with moderate collaboration from Shreda5 and licensed under the GPL V3 License. Nebula Draw strives to be a high quality method to create ASCII graphics on low-resource systems.
 
-##Installation and Execution Instructions
+#### Installation and Execution Instructions
 
 **Note**: Nebula Draw currently only supports Linux based operating systems. A macOS version is planned for future release.
 
@@ -18,9 +18,9 @@ Installing from source is the preferred way to install Nebula Draw. Compiling a 
 3. Then launch Nebula Draw by entering the following command:
   	`./ndraw`
 4. Press the "?" key to view help for getting started with the application.
-5. * 
+5. \* 
 
-##Binary Installation
+#### Binary Installation
 
 Installing from binary results in potentially lower performance than installing from source. However this method is slightly less complex for the average user.
 
@@ -30,7 +30,7 @@ Installing from binary results in potentially lower performance than installing 
 3. Then launch Nebula Draw by entering the following command:
 	`./ndraw`
 4. Press the "?" key to view help for getting started with the application.
-5. * 
+5. \* 
 
 ######\* Optional: If you would like to launch Nebula Draw without having to change your working directory, copy ndraw to /usr/bin/ by running the following command as superuser (su, sudo):
 
