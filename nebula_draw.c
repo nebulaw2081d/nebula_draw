@@ -19,8 +19,9 @@
    but does have a series of primary goals, which are currently being pursued
    and will always be considered in future judgements. To learn more about the
    Nebula Centre Project visit it on the web at https://nebulacentre.net.
-   
+
    We always welcome lain (o.o)
+
 */
 
 #include <stdio.h>
@@ -130,7 +131,7 @@ int main(int argc, char *argv[]) {
 			selection_char = "[] ";
 		}
 		if (selection_type == 4) {
-			selection_char = "~ ";
+			selection_char = "~  ";
 		}
 		if (selection_type == 5) {
 			selection_char = "[+]";
@@ -145,11 +146,11 @@ int main(int argc, char *argv[]) {
 		mvprintw(maxy - 2, maxx - 40, "              ");
 		mvprintw(maxy - 2, maxx - 28, "MODE ");
 		mvprintw(maxy - 2, maxx - 23, selection_char);
-		if (selection_type == 4) {
+/*		if (selection_type == 4) {
 			mvprintw(maxy - 2, maxx - 40, "MODE ");
-			mvprintw(maxy - 2, maxx - 33, "[HOLD SPACE]  ");
+			mvprintw(maxy - 2, maxx - 33, "");
 			mvprintw(maxy - 2, maxx - 35, selection_char);
-		}
+		} */
 		mvprintw(maxy - 2, (maxx / 2) - 19, "                               ");
 		mvprintw(maxy - 2, (maxx / 2) + 12, release);
 		attrset(COLOR_PAIR(color));
@@ -165,12 +166,7 @@ int main(int argc, char *argv[]) {
 		mvhline(maxy - 2, 1, ' ', (maxx / 2) - 20);
 		mvhline(maxy - 4, 1, ' ', maxx - 2);
 		mvhline(maxy - 3, 1, 0, maxx - 2);
-		if (selection_type != 4) {
-			mvhline(maxy - 2, (maxx / 2) + 18, ' ', (maxx / 2) - 46);
-		}
-		else; {
-			mvhline(maxy - 2, (maxx / 2) + 18, ' ', (maxx / 2) - 58);
-		}
+		mvhline(maxy - 2, (maxx / 2) + 18, ' ', (maxx / 2) - 46);
 		refresh();
 	}
 	void drawRectangle(int y1, int x1, int y2, int x2) {
@@ -185,24 +181,29 @@ int main(int argc, char *argv[]) {
 		mvaddch(y2, x2, *symbol);
 		refreshHud();
 	}
+
 	void drawHorizontal(int x1, int x2, int y) {
 		attrset(COLOR_PAIR(color));
 		mvhline(y, x1, *symbol, x2 - x1);
 		refreshHud();
 	}
+
 	void drawVertical(int y1, int y2, int x) {
 		attrset(COLOR_PAIR(color));
 		mvvline(y1, x, *symbol, y2 - y1);
 		refreshHud();
 	}
+
 	void print() {
 		attrset(COLOR_PAIR(color));
 		mvaddch(event.y, event.x, *symbol);
 		refreshHud();
 	}
+
 	void erasePoint() {
 		mvaddch(event.y, event.x, ' ');
 	}
+
 	void eraseRectangleFill(int y1, int x1, int y2, int x2) {
 		attrset(COLOR_PAIR(color));
 		mvhline(y1, x1, ' ', x2-x1);
@@ -218,6 +219,7 @@ int main(int argc, char *argv[]) {
 		}
 		refreshHud();
 	}
+
 	void drawRectangleFill(int y1, int x1, int y2, int x2) {
 		attrset(COLOR_PAIR(color));
 		mvhline(y1, x1, *symbol, x2-x1);
@@ -233,6 +235,7 @@ int main(int argc, char *argv[]) {
 		}
 		refreshHud();
 	}
+
 	void drawProcess() {
 		if (selection_type == 0) {
 			print();
@@ -299,13 +302,14 @@ int main(int argc, char *argv[]) {
 			}
 		}
 	}
+
 	void about() {
 		//When k is pressed show us the information on this application
 		WINDOW * aboutWin = newwin(9, 50, (maxy / 2) - 4.5, (maxx / 2) - 25);
 		refresh();
 		box(aboutWin, 0, 0);
 		wrefresh(aboutWin);
-		mvwprintw(aboutWin, 1, 19, "Nebula Draw");
+		mvwprintw(aboutWin, 1, 15, "Nebula Draw (v1.01)");
 		mvwprintw(aboutWin, 2, 3, "The Nebula Centre Project and Shreda5 @ 2019");
 		mvwprintw(aboutWin, 4, 3, "web: https://nebulacentre.net");
 		mvwprintw(aboutWin, 5, 3, "irc: https://nebulacentre.net/messaging.html");
@@ -324,6 +328,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 	}
+
 	void help() {
 		WINDOW * helpWin = newwin(24, 80, (maxy / 2) - 12, (maxx / 2) - 40);
 		refresh();
@@ -437,6 +442,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 	}
+
 	for (;;) {
 		refreshHud();
 		key = wgetch(stdscr);
