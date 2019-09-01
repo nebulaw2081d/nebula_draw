@@ -2,9 +2,11 @@
 
 Nebula Draw is a Terminal User Interface (TUI) drawing application, created by the Nebula Centre Project with moderate collaboration from Shreda5 and licensed under the GPL V3 License. Nebula Draw strives to be a high quality method to create ASCII graphics on low-resource systems.
 
-**Screenshot**
+**Screenshots**
 
 ![screenshot.png](screenshot.png)
+
+![screenshot2.png](screenshot2.png)
 
 #### Installation and Execution Instructions
 
