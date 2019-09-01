@@ -4,9 +4,9 @@ Nebula Draw is a Terminal User Interface (TUI) drawing application, created by t
 
 **Screenshots**
 
-![screenshot.png](screenshot.png)
+![screenshot.png](img/screenshot.png)
 
-![screenshot2.png](screenshot2.png)
+![screenshot2.png](img/screenshot2.png)
 
 #### Installation and Execution Instructions
 
