@@ -18,7 +18,7 @@ Installing from source is the preferred way to install Nebula Draw. Compiling a 
 
 **Note**: Verify the gcc compiler is installed on your system. Most major Linux distributions come with it preinstalled.
 
-1. Download the source code (nebula\_draw.c) and the Makefile (Makefile).
+1. Download the source code (nebula\_draw.c) and Makefile (Makefile).
 2. Open your favorite terminal emulator and enter the following command:
  	`cd ~/Downloads; make` **
 3. Then launch Nebula Draw by entering the following command:
@@ -38,9 +38,9 @@ Installing from binary results in potentially lower performance than installing 
 4. Press the "?" key to view help for getting started with the application.
 5. \* 
 
-###### \* Optional: If you would like to launch Nebula Draw without having to change your working directory, copy ndraw to /usr/bin/ by running the following command as superuser (su, sudo):
+###### \* Optional: If you would like to launch Nebula Draw without having to change your working directory, run the following command as superuser (su, sudo):
 
-`cp ~/Downloads/ndraw /usr/bin` *
+`cd ~/Downloads/nebula_draw; sudo make install` *
 
 ###### \*\* If the download directory on your web browser is different, substitute ~/Downloads with the correct path.
 
