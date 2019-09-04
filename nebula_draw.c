@@ -53,16 +53,16 @@ int main(int argc, char *argv[]) {
 	noecho();
 	clear();
 	cbreak();
-	curs_set(0); /* Hide cursor*/
-	keypad(stdscr, TRUE); /* Turn key IDs into easier to use names */
-	mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL); /* Initialize mouse for use */
-	getmaxyx(stdscr, maxy, maxx); /* Determine width and height of terminal window */
-	if (maxy < 25 || maxx < 105) { 	/* Preliminary check for too small a window */
+	curs_set(0);
+	keypad(stdscr, TRUE);
+	mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
+	getmaxyx(stdscr, maxy, maxx);
+	if (maxy < 25 || maxx < 105) {
 		endwin();
 		printf("%s", "Your terminal window is too small to run this application.\n");
 		return 0;
 	}
-	printf("\033[?1003h\n"); /* Prepare terminal for mouse interaction */
+	printf("\033[?1003h\n");
 	box(stdscr, 0, 0);
 	/* Colors */
 	start_color();
@@ -148,11 +148,6 @@ int main(int argc, char *argv[]) {
 		mvprintw(maxy - 2, maxx - 40, "              ");
 		mvprintw(maxy - 2, maxx - 28, "MODE ");
 		mvprintw(maxy - 2, maxx - 23, selection_char);
-/*		if (selection_type == 4) {
-			mvprintw(maxy - 2, maxx - 40, "MODE ");
-			mvprintw(maxy - 2, maxx - 33, "");
-			mvprintw(maxy - 2, maxx - 35, selection_char);
-		} */
 		mvprintw(maxy - 2, (maxx / 2) - 19, "                               ");
 		mvprintw(maxy - 2, (maxx / 2) + 12, release);
 		attrset(COLOR_PAIR(color));
@@ -316,8 +311,8 @@ int main(int argc, char *argv[]) {
 		mvwprintw(aboutWin, 5, 3, "irc: https://nebulacentre.net/messaging.html");
 		mvwprintw(aboutWin, 7, 11, "Press \"?\" or \"/\" for help");
 		wrefresh(aboutWin);
-		printf("\033[?1003l\n"); /* Disable mouse input */
-		int k = wgetch(aboutWin); /* Capture user's mouse */
+		printf("\033[?1003l\n");
+		int k = wgetch(aboutWin);
 		for (;;) {
 			if (k) {
 				wclear(aboutWin);
