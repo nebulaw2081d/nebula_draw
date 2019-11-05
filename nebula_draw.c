@@ -53,16 +53,16 @@ int main(int argc, char *argv[]) {
 	noecho();
 	clear();
 	cbreak();
-	curs_set(0);
-	keypad(stdscr, TRUE);
-	mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);
-	getmaxyx(stdscr, maxy, maxx);
-	if (maxy < 25 || maxx < 105) {
+	curs_set(0); /* Hide cursor*/
+	keypad(stdscr, TRUE); /* Turn key IDs into easier to use names */
+	mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL); /* Initialize mouse for use */
+	getmaxyx(stdscr, maxy, maxx); /* Determine width and height of terminal window */
+	if (maxy < 25 || maxx < 105) { 	/* Preliminary check for too small a window */
 		endwin();
 		printf("%s", "Your terminal window is too small to run this application.\n");
 		return 0;
 	}
-	printf("\033[?1003h\n");
+	printf("\033[?1003h\n"); /* Prepare terminal for mouse interaction */
 	box(stdscr, 0, 0);
 	/* Colors */
 	start_color();
@@ -85,32 +85,34 @@ int main(int argc, char *argv[]) {
 	}
 
 	void refreshSymbol() { /* Current brush indicator */
-		if (symbol_id == 0) {
-			symbol = "+  ";
-		}
-		if (symbol_id == 1) {
-			symbol = "@  ";
-		}
-		if (symbol_id == 2) {
-			symbol = "#  ";
-		}
-		if (symbol_id == 3) {
-			symbol = "$  ";
-		}
-		if (symbol_id == 4) {
-			symbol = "^  ";
-		}
-		if (symbol_id == 5) {
-			symbol = "&  ";
-		}
-		if (symbol_id == 6) {
-			symbol = "*  ";
-		}
-		if (symbol_id == 7) {
-			symbol = "/  ";
-		}
-		if (symbol_id == 8) {
-			symbol = "\\  ";
+		switch (symbol_id) {
+			case 0:
+				symbol = "+ ";
+				break;
+			case 1:
+				symbol = "@  ";
+				break;
+			case 2: 
+				symbol = "#  ";
+				break;
+			case 3:
+				symbol = "$  ";
+				break;
+			case 4:
+				symbol = "^  ";
+				break;
+			case 5:
+				symbol = "&  ";
+				break;
+			case 6:
+				symbol = "*  ";
+				break;
+			case 7:
+				symbol = "/  ";
+				break;
+			case 8:
+				symbol = "\\  ";
+				break;
 		}
 		attrset(COLOR_PAIR(0));
 		mvprintw(maxy - 2, maxx - 19, "BRUSH ");
@@ -120,34 +122,41 @@ int main(int argc, char *argv[]) {
 	}
 
 	void refreshSelection() { /* Current mode indicator */
-		if (selection_type == 0) {
-			selection_char = "+  ";
-		}
-		if (selection_type == 1) {
-			selection_char = "-  ";
-		}
-		if (selection_type == 2) {
-			selection_char = "|  ";
-		}
-		if (selection_type == 3) {
-			selection_char = "[] ";
-		}
-		if (selection_type == 4) {
-			selection_char = "~  ";
-		}
-		if (selection_type == 5) {
-			selection_char = "[+]";
-		}
-		if (selection_type == 6) {
-			selection_char = "X  ";
-		}
-		if (selection_type == 7) {
-			selection_char = "[X]";
+		switch (selection_type) {
+			case 0:
+				selection_char = "+  ";
+				break;
+			case 1:
+				selection_char = "-  ";
+				break;
+			case 2:
+				selection_char = "|  ";
+				break;
+			case 3:
+				selection_char = "[] ";
+				break;
+			case 4:	
+				selection_char = "~  ";
+				break;
+			case 5:
+				selection_char = "[+]";
+				break;
+			case 6:
+				selection_char = "X  ";
+				break;
+			case 7:
+				selection_char = "[X]";
+				break;
 		}
 		attrset(COLOR_PAIR(0));
 		mvprintw(maxy - 2, maxx - 40, "              ");
 		mvprintw(maxy - 2, maxx - 28, "MODE ");
 		mvprintw(maxy - 2, maxx - 23, selection_char);
+/*		if (selection_type == 4) {
+			mvprintw(maxy - 2, maxx - 40, "MODE ");
+			mvprintw(maxy - 2, maxx - 33, "");
+			mvprintw(maxy - 2, maxx - 35, selection_char);
+		} */
 		mvprintw(maxy - 2, (maxx / 2) - 19, "                               ");
 		mvprintw(maxy - 2, (maxx / 2) + 12, release);
 		attrset(COLOR_PAIR(color));
@@ -234,69 +243,71 @@ int main(int argc, char *argv[]) {
 	}
 
 	void drawProcess() { /* Determine what to do when the mode action key is pressed */
-		if (selection_type == 0) {
-			print();
-		}
-		if (selection_type == 1) {
-			if (lastx - event.x > 0) {
-				drawHorizontal(event.x, lastx, lasty);
-			}
-			if (lastx - event.x < 0) {
-				drawHorizontal(lastx, event.x, lasty);
-			}
-		}
-		if (selection_type == 2) {
-			if (lasty - event.y > 0) {
-				drawVertical(event.y, lasty, lastx);
-			}
-			if (lasty - event.y < 0) {
-				drawVertical(lasty, event.y, lastx);
-			}
-		}
-		if (selection_type == 3) {	
-			if (lasty - event.y > 0 && lastx - event.x > 0) {
-				drawRectangle(event.y, event.x, lasty, lastx);
-			}
-			else if (lasty - event.y < 0 && lastx - event.x > 0) {
-				drawRectangle(lasty, event.x, event.y, lastx);
-			}
-			else if (lasty - event.y > 0 && lastx - event.x < 0) {
-				drawRectangle(event.y, lastx, lasty, event.x);
-			}
-			else if (lasty - event.y < 0 && lastx - event.x < 0) {
-				drawRectangle(lasty, lastx, event.y, event.x);
-			}
-		}
-		if (selection_type == 5) {
-			if (lasty - event.y > 0 && lastx - event.x > 0) {
-				drawRectangleFill(event.y, event.x, lasty, lastx);
-			}
-			else if (lasty - event.y < 0 && lastx - event.x > 0) {
-				drawRectangleFill(lasty, event.x, event.y, lastx);
-			}
-			else if (lasty - event.y > 0 && lastx - event.x < 0) {
-				drawRectangleFill(event.y, lastx, lasty, event.x);
-			}
-			else if (lasty - event.y < 0 && lastx - event.x < 0) {
-				drawRectangleFill(lasty, lastx, event.y, event.x);
-			}
-		}
-		if (selection_type == 6) {
-			erasePoint();
-		}
-		if (selection_type == 7) {
-			if (lasty - event.y > 0 && lastx - event.x > 0) {
-				eraseRectangleFill(event.y, event.x, lasty, lastx);
-			}
-			else if (lasty - event.y < 0 && lastx - event.x > 0) {
-				eraseRectangleFill(lasty, event.x, event.y, lastx);
-			}
-			else if (lasty - event.y > 0 && lastx - event.x < 0) {
-				eraseRectangleFill(event.y, lastx, lasty, event.x);
-			}
-			else if (lasty - event.y < 0 && lastx - event.x < 0) {
-				eraseRectangleFill(lasty, lastx, event.y, event.x);
-			}
+		switch (selection_type) {
+			case 0:
+				print();
+				break;
+			case 1:
+				if (lastx - event.x > 0) {
+					drawHorizontal(event.x, lastx, lasty);
+				}
+				if (lastx - event.x < 0) {
+					drawHorizontal(lastx, event.x, lasty);
+				}
+				break;
+			case 2:
+				if (lasty - event.y > 0) {
+					drawVertical(event.y, lasty, lastx);
+				}
+				if (lasty - event.y < 0) {
+					drawVertical(lasty, event.y, lastx);
+				}
+				break;
+			case 3:
+				if (lasty - event.y > 0 && lastx - event.x > 0) {
+					drawRectangle(event.y, event.x, lasty, lastx);
+				}
+				else if (lasty - event.y < 0 && lastx - event.x > 0) {
+					drawRectangle(lasty, event.x, event.y, lastx);
+				}
+				else if (lasty - event.y > 0 && lastx - event.x < 0) {
+					drawRectangle(event.y, lastx, lasty, event.x);
+				}
+				else if (lasty - event.y < 0 && lastx - event.x < 0) {
+					drawRectangle(lasty, lastx, event.y, event.x);
+				}
+				break;
+			case 5:
+				if (lasty - event.y > 0 && lastx - event.x > 0) {
+					drawRectangleFill(event.y, event.x, lasty, lastx);
+				}
+				else if (lasty - event.y < 0 && lastx - event.x > 0) {
+					drawRectangleFill(lasty, event.x, event.y, lastx);
+				}
+				else if (lasty - event.y > 0 && lastx - event.x < 0) {
+					drawRectangleFill(event.y, lastx, lasty, event.x);
+				}
+				else if (lasty - event.y < 0 && lastx - event.x < 0) {
+					drawRectangleFill(lasty, lastx, event.y, event.x);
+				}
+				break;
+			case 6:
+				erasePoint();
+				break;
+			case 7:
+				if (lasty - event.y > 0 && lastx - event.x > 0) {
+					eraseRectangleFill(event.y, event.x, lasty, lastx);
+				}
+				else if (lasty - event.y < 0 && lastx - event.x > 0) {
+					eraseRectangleFill(lasty, event.x, event.y, lastx);
+				}
+				else if (lasty - event.y > 0 && lastx - event.x < 0) {
+					eraseRectangleFill(event.y, lastx, lasty, event.x);
+				}
+				else if (lasty - event.y < 0 && lastx - event.x < 0) {
+					eraseRectangleFill(lasty, lastx, event.y, event.x);
+				}
+				break;
 		}
 	}
 
@@ -311,8 +322,8 @@ int main(int argc, char *argv[]) {
 		mvwprintw(aboutWin, 5, 3, "irc: https://nebulacentre.net/messaging.html");
 		mvwprintw(aboutWin, 7, 11, "Press \"?\" or \"/\" for help");
 		wrefresh(aboutWin);
-		printf("\033[?1003l\n");
-		int k = wgetch(aboutWin);
+		printf("\033[?1003l\n"); /* Disable mouse input */
+		int k = wgetch(aboutWin); /* Capture user's mouse */
 		for (;;) {
 			if (k) {
 				wclear(aboutWin);
@@ -410,7 +421,7 @@ int main(int argc, char *argv[]) {
 						mvwprintw(helpWin3, 6, 5, "The space in between the two points will be filled with the");
 						mvwprintw(helpWin3, 7, 5, "currently selected brush and color.");
 						mvwprintw(helpWin3, 9, 5, "X [point erase] - Press the mode action key to erase the position");
-						mvwprintw(helpWin3, 10, 5, "under the cursor");
+						mvwprintw(helpWin3, 10, 5, "under the cursor.");
 						mvwprintw(helpWin3, 12, 5, "[X] [mass erase tool] - Press the mode action key to select one");
 						mvwprintw(helpWin3, 13, 5, "position on the screen, then again to select the second position.");
 						mvwprintw(helpWin3, 14, 5, "The space in between the two points will be erased.");
