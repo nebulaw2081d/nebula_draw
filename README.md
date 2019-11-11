@@ -10,7 +10,7 @@ Nebula Draw is a Terminal User Interface (TUI) drawing application, created by t
 
 #### Installation and Execution Instructions
 
-**Note**: Nebula Draw currently only supports Linux based operating systems. A macOS version is planned for future release.
+**Note**: Nebula Draw currently only supports Linux based operating systems. macOS is currently not supported, but users may test Nebula Draw on it if desired.
 
 Verify the ncurses library is present on your system. Most major Linux distributions come with the library preinstalled.
 Installation from Source
